@@ -7,9 +7,8 @@
     "build": "cross-env NODE_ENV=development && webpack --progress",
     "dev": "cross-env NODE_ENV=development API_PORT=3000 API_URL=localhost  webpack serve --progress ",
     "server-json": "json-server --watch server.json ",
-    "pretest": "start /B json-server -p 3060 --watch server.test.json && echo $! > json-server.pid",
-    "test": "timeout /t 2 >nul && cross-env NODE_ENV=test API_PORT=3060 API_URL=http://localhost jest",
-    "posttest": "for /f %p in (json-server.pid) do taskkill /PID %p /F && del json-server.pid"
+    "test": "concurrently \"json-server -p 3060 --watch server.test.json\" \"cross-env NODE_ENV=test API_PORT=3060 API_URL=http://localhost jest\"",
+    "posttest": "kill-port 3060"
 
   },
   "dependencies": {
@@ -18,6 +17,7 @@
     "three": "^0.173.0"
   },
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "@types/kill-port": "^2.0.3",
     "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
