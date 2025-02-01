@@ -1,7 +1,7 @@
 name: 3d Color Picker Azure Deploy
 
 env:
-  APP_LOCATION: "public/dist"
+  APP_LOCATION: "src"
   OUTPUT_LOCATION: "public"
 on:
   push:
@@ -38,7 +38,6 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           action: "upload"
-          skip_app_build: true
           app_location: ${{ env.APP_LOCATION }}
           output_location: ${{ env.OUTPUT_LOCATION }}
 
