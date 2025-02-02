@@ -7,10 +7,11 @@ import type {Config} from 'jest';
 
 const config: Config = {
   preset: 'ts-jest',
+  setupFilesAfterEnv: ['<rootDir>/testSetup.ts'],
   clearMocks: true,
   collectCoverage: true,
   coverageDirectory: "coverage",
-  coverageProvider: "v8",
+  coverageProvider: "v8"
 };
 
 export default config;
