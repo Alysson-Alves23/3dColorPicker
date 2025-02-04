@@ -1,27 +1,34 @@
 import * as THREE from "three";
 
 export class Cube {
-    private object: THREE.Mesh;
+    private cube: THREE.Mesh;
+    private edges: THREE.LineSegments;
 
     constructor() {
-    const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-    this.object = new THREE.Mesh( geometry, material );
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 }); // MeshStandardMaterial para o cubo
+        this.cube = new THREE.Mesh(geometry, material);
+
+        // Adicionando arestas ao cubo
+        const edgesGeometry = new THREE.EdgesGeometry(geometry);
+        const edgesMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
+        this.edges = new THREE.LineSegments(edgesGeometry, edgesMaterial);
+        this.cube.add(this.edges); // Adiciona as arestas ao cubo
     }
 
-    getObject(): THREE.Mesh {
-        return this.object;
-    }
-
-    setColor(color: string): void {
-        this.object.material = new THREE.MeshBasicMaterial({color: color});
+    getObject(): THREE.Object3D {
+        return this.cube;
     }
 
     setPosition(x: number, y: number, z: number): void {
-        this.object.position.set(x, y, z);
+        this.cube.position.set(x, y, z);
     }
 
     setRotation(x: number, y: number, z: number): void {
-        this.object.rotation.set(x, y, z);
+        this.cube.rotation.set(x, y, z);
+    }
+
+    setColor(color: number): void {
+        (this.cube.material as THREE.MeshStandardMaterial).color.set(color);
     }
 }
