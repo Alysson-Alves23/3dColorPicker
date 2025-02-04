@@ -1,13 +1,24 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Aplicação</title>
+    <title>Three.js + TypeScript</title>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@latest/build/three.module.js",
+                "orbit-controls": "https://unpkg.com/three@latest/examples/jsm/controls/OrbitControls.js"
+            }
+        }
+    </script>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+    </style>
 </head>
 <body>
 
-
+<script type="module" src="/dist/index.js"></script>
 </body>
-<script src="/dist/index.js"></script>
 </html>
