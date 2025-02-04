@@ -1,6 +1,6 @@
 import config from "./config";
 
-class CubeRepository {
+export class CubeRepository {
         private static baseApiUrl = `${config.url}:${config.port}`;
 
         /**
@@ -8,12 +8,14 @@ class CubeRepository {
          * @returns A cor do objeto no formato hexadecimal.
          */
         public async getObjectColor(): Promise<string> {
-                const response = await fetch(`${CubeRepository.baseApiUrl}/objectColor`);
+
+
+                const response = await fetch(`http://${CubeRepository.baseApiUrl}/color`);
+
                 if (!response.ok) {
-                        throw new Error(`Failed to fetch object color: ${response.statusText}`);
+                        throw new Error(`Failed to fetch light intensity: ${response.statusText}`);
                 }
-                const data = await response.json();
-                return data.color;
+                return await response.text();
         }
 
         /**
@@ -21,7 +23,7 @@ class CubeRepository {
          * @param color - A nova cor do objeto no formato hexadecimal.
          */
         public async updateObjectColor(color: string): Promise<void> {
-                const response = await fetch(`${CubeRepository.baseApiUrl}/objectColor`, {
+                const response = await fetch(`http://${CubeRepository.baseApiUrl}/color`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ color }),
@@ -35,13 +37,13 @@ class CubeRepository {
          * Busca a intensidade da luz no backend.
          * @returns A intensidade da luz (número entre 0 e 1).
          */
-        public async getLightIntensity(): Promise<number> {
-                const response = await fetch(`${CubeRepository.baseApiUrl}/light`);
+        public async getLightIntensity(): Promise<Number> {
+                const response = await fetch(`http://${CubeRepository.baseApiUrl}/lightIntensity`);
                 if (!response.ok) {
                         throw new Error(`Failed to fetch light intensity: ${response.statusText}`);
                 }
-                const data = await response.json();
-                return data.intensity;
+
+                return parseFloat( await response.text());
         }
 
         /**
@@ -49,7 +51,7 @@ class CubeRepository {
          * @param intensity - A nova intensidade da luz (número entre 0 e 1).
          */
         public async updateLightIntensity(intensity: number): Promise<void> {
-                const response = await fetch(`${CubeRepository.baseApiUrl}/light`, {
+                const response = await fetch(`http://${CubeRepository.baseApiUrl}/lightIntensity`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ intensity }),
@@ -64,12 +66,11 @@ class CubeRepository {
          * @returns A cor de fundo no formato hexadecimal.
          */
         public async getBackgroundColor(): Promise<string> {
-                const response = await fetch(`${CubeRepository.baseApiUrl}/backgroundColor`);
+                const response = await fetch(`http://${CubeRepository.baseApiUrl}/backgroundColor`);
                 if (!response.ok) {
                         throw new Error(`Failed to fetch background color: ${response.statusText}`);
                 }
-                const data = await response.json();
-                return data.color;
+                return response.text();
         }
 
         /**
@@ -77,7 +78,7 @@ class CubeRepository {
          * @param color - A nova cor de fundo no formato hexadecimal.
          */
         public async updateBackgroundColor(color: string): Promise<void> {
-                const response = await fetch(`${CubeRepository.baseApiUrl}/backgroundColor`, {
+                const response = await fetch(`http://${CubeRepository.baseApiUrl}/backgroundColor`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ color }),
@@ -92,12 +93,11 @@ class CubeRepository {
          * @returns A posição do objeto no formato {x: number, y: number, z: number}.
          */
         public async getPosition(): Promise<{ x: number; y: number; z: number }> {
-                const response = await fetch(`${CubeRepository.baseApiUrl}/position`);
+                const response = await fetch(`http://${CubeRepository.baseApiUrl}/position`);
                 if (!response.ok) {
                         throw new Error(`Failed to fetch position: ${response.statusText}`);
                 }
-                const data = await response.json();
-                return data.position;
+                return response.json();
         }
 
         /**
@@ -105,10 +105,10 @@ class CubeRepository {
          * @param position - A nova posição do objeto no formato { x: number, y: number, z: number }.
          */
         public async updatePosition(position: { x: number; y: number; z: number }): Promise<void> {
-                const response = await fetch(`${CubeRepository.baseApiUrl}/position`, {
+                const response = await fetch(`http://${CubeRepository.baseApiUrl}/position`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ position }),
+                        body: JSON.stringify( position ),
                 });
                 if (!response.ok) {
                         throw new Error(`Failed to update position: ${response.statusText}`);
@@ -120,12 +120,11 @@ class CubeRepository {
          * @returns A rotação do objeto no formato {x: number, y: number, z: number}.
          */
         public async getRotation(): Promise<{ x: number; y: number; z: number }> {
-                const response = await fetch(`${CubeRepository.baseApiUrl}/rotation`);
+                const response = await fetch(`http://${CubeRepository.baseApiUrl}/rotation`);
                 if (!response.ok) {
                         throw new Error(`Failed to fetch rotation: ${response.statusText}`);
                 }
-                const data = await response.json();
-                return data.rotation;
+                return response.json();
         }
 
         /**
@@ -133,10 +132,10 @@ class CubeRepository {
          * @param rotation - A nova rotação do objeto no formato { x: number, y: number, z: number }.
          */
         public async updateRotation(rotation: { x: number; y: number; z: number }): Promise<void> {
-                const response = await fetch(`${CubeRepository.baseApiUrl}/rotation`, {
+                const response = await fetch(`http://${CubeRepository.baseApiUrl}/rotation`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ rotation }),
+                        body: JSON.stringify(rotation ),
                 });
                 if (!response.ok) {
                         throw new Error(`Failed to update rotation: ${response.statusText}`);
@@ -144,4 +143,3 @@ class CubeRepository {
         }
 }
 
-export default CubeRepository;

@@ -1,8 +1,9 @@
 {
-    "objectColor": "#00ff00",
-    "light": 5,
-    "backgroundColor": "#ffffff",
-    "position": { "x": 0, "y": 0, "z": 0 },
-    "rotation": { "x": 0, "y": 0, "z": 0 }
-
+    "config": {
+        "color": "#ff0000",
+        "lightIntensity": 1,
+        "backgroundColor": 128,
+        "position": { "x": 0, "y": 0, "z": 0 },
+        "rotation": { "x": 0, "y": 0, "z": 0 }
+    }
 }

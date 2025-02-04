@@ -1,5 +1,5 @@
 import {describe, expect, it, beforeEach} from '@jest/globals';
-import CubeRepository from "./repository";
+import {CubeRepository} from "./repository";
 import config from './config';
 import fetchMock from 'jest-fetch-mock';
 
@@ -17,11 +17,11 @@ describe('CubeRepository', () => {
 
     it('should fetch object color', async () => {
 
-        fetchMock.mockResponseOnce(JSON.stringify({ color: '#00ff00' }));
+        fetchMock.mockResponseOnce('#00ff00' );
 
         const color = await cubeRepository.getObjectColor();
         expect(color).toBe('#00ff00');
-        expect(fetchMock).toHaveBeenCalledWith(`${config.url}:${config.port}/objectColor`);
+        expect(fetchMock).toHaveBeenCalledWith(`http://${config.url}:${config.port}/color`);
     });
 
 
@@ -36,7 +36,7 @@ describe('CubeRepository', () => {
         fetchMock.mockResponseOnce(JSON.stringify({}));
 
         await cubeRepository.updateObjectColor('#ff0000');
-        expect(fetchMock).toHaveBeenCalledWith(`${config.url}:${config.port}/objectColor`, {
+        expect(fetchMock).toHaveBeenCalledWith(`http://${config.url}:${config.port}/color`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ color: '#ff0000' }),
@@ -46,11 +46,11 @@ describe('CubeRepository', () => {
 
     it('should fetch light intensity', async () => {
 
-        fetchMock.mockResponseOnce(JSON.stringify({ intensity: 1 }));
+        fetchMock.mockResponseOnce( JSON.stringify(1) );
 
         const intensity = await cubeRepository.getLightIntensity();
         expect(intensity).toBe(1);
-        expect(fetchMock).toHaveBeenCalledWith(`${config.url}:${config.port}/light`);
+        expect(fetchMock).toHaveBeenCalledWith(`http://${config.url}:${config.port}/lightIntensity`);
     });
 
 
@@ -59,7 +59,7 @@ describe('CubeRepository', () => {
         fetchMock.mockResponseOnce(JSON.stringify({}));
 
         await cubeRepository.updateLightIntensity(0.5);
-        expect(fetchMock).toHaveBeenCalledWith(`${config.url}:${config.port}/light`, {
+        expect(fetchMock).toHaveBeenCalledWith(`http://${config.url}:${config.port}/lightIntensity`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ intensity: 0.5 }),
@@ -69,11 +69,11 @@ describe('CubeRepository', () => {
 
     it('should fetch background color', async () => {
 
-        fetchMock.mockResponseOnce(JSON.stringify({ color: '#ffffff' }));
+        fetchMock.mockResponseOnce( '#ffffff');
 
         const color = await cubeRepository.getBackgroundColor();
         expect(color).toBe('#ffffff');
-        expect(fetchMock).toHaveBeenCalledWith(`${config.url}:${config.port}/backgroundColor`);
+        expect(fetchMock).toHaveBeenCalledWith(`http://${config.url}:${config.port}/backgroundColor`);
     });
 
 
@@ -82,7 +82,7 @@ describe('CubeRepository', () => {
         fetchMock.mockResponseOnce(JSON.stringify({}));
 
         await cubeRepository.updateBackgroundColor('#000000');
-        expect(fetchMock).toHaveBeenCalledWith(`${config.url}:${config.port}/backgroundColor`, {
+        expect(fetchMock).toHaveBeenCalledWith(`http://${config.url}:${config.port}/backgroundColor`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ color: '#000000' }),
@@ -92,11 +92,11 @@ describe('CubeRepository', () => {
 
     it('should fetch position', async () => {
 
-        fetchMock.mockResponseOnce(JSON.stringify({ position: { x: 0, y: 0, z: 0 } }));
+        fetchMock.mockResponseOnce(JSON.stringify({  x: 0, y: 0, z: 0 }));
 
         const position = await cubeRepository.getPosition();
         expect(position).toEqual({ x: 0, y: 0, z: 0 });
-        expect(fetchMock).toHaveBeenCalledWith(`${config.url}:${config.port}/position`);
+        expect(fetchMock).toHaveBeenCalledWith(`http://${config.url}:${config.port}/position`);
     });
 
 
@@ -105,20 +105,20 @@ describe('CubeRepository', () => {
         fetchMock.mockResponseOnce(JSON.stringify({}));
 
         await cubeRepository.updatePosition({ x: 1, y: 2, z: 3 });
-        expect(fetchMock).toHaveBeenCalledWith(`${config.url}:${config.port}/position`, {
+        expect(fetchMock).toHaveBeenCalledWith(`http://${config.url}:${config.port}/position`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ position: { x: 1, y: 2, z: 3 } }),
+            body: JSON.stringify({ x: 1, y: 2, z: 3 }),
         });
     });
 
     it('should fetch rotation', async () => {
 
-        fetchMock.mockResponseOnce(JSON.stringify({ rotation: { x: 0, y: 0, z: 0 } }));
+        fetchMock.mockResponseOnce(JSON.stringify({ x: 0, y: 0, z: 0 }));
 
         const rotation = await cubeRepository.getRotation();
         expect(rotation).toEqual({ x: 0, y: 0, z: 0 });
-        expect(fetchMock).toHaveBeenCalledWith(`${config.url}:${config.port}/rotation`);
+        expect(fetchMock).toHaveBeenCalledWith(`http://${config.url}:${config.port}/rotation`);
     });
 
     it('should update rotation', async () => {
@@ -126,10 +126,10 @@ describe('CubeRepository', () => {
         fetchMock.mockResponseOnce(JSON.stringify({}));
 
         await cubeRepository.updateRotation({ x: 1, y: 2, z: 3 });
-        expect(fetchMock).toHaveBeenCalledWith(`${config.url}:${config.port}/rotation`, {
+        expect(fetchMock).toHaveBeenCalledWith(`http://${config.url}:${config.port}/rotation`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ rotation: { x: 1, y: 2, z: 3 } }),
+            body: JSON.stringify( { x: 1, y: 2, z: 3 }),
         });
     });
 });
