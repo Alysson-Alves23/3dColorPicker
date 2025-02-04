@@ -1,4 +1,6 @@
-path = require('path');
+import path from 'path';
+import {DefinePlugin,EnvironmentPlugin} from 'webpack';
+import {config} from 'dotenv';
 module.exports = {
     mode: process.env.NODE_ENV ,
     entry: {
@@ -30,6 +32,12 @@ module.exports = {
         },
         port: 8080,
         hot: true,
-    }
+    },
+    plugins: [
+        new EnvironmentPlugin({...process.env}),
+        new DefinePlugin({
+            "process.env": JSON.stringify(config().parsed),
+        }),
+    ]
 
 };
