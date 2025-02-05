@@ -74,6 +74,7 @@ export class Controller {
     private onWheel(event: WheelEvent): void {
         const scrollSpeed = 0.01;
         this.cube.getObject().position.z += event.deltaY * scrollSpeed;
+        store.dispatch(setPosition({ x: this.cube.getObject().position.x, y: this.cube.getObject().position.y, z: this.cube.getObject().position.z }));
     }
 
     private onKeyDown(event: KeyboardEvent): void {
