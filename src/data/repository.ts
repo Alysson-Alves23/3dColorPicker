@@ -24,7 +24,7 @@ export class CubeRepository {
          */
         public async updateObjectColor(color: string): Promise<void> {
                 const response = await fetch(`http://${CubeRepository.baseApiUrl}/color`, {
-                        method: 'POST',
+                        method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ color }),
                 });
@@ -52,7 +52,7 @@ export class CubeRepository {
          */
         public async updateLightIntensity(intensity: number): Promise<void> {
                 const response = await fetch(`http://${CubeRepository.baseApiUrl}/lightIntensity`, {
-                        method: 'POST',
+                        method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ intensity }),
                 });
@@ -79,7 +79,7 @@ export class CubeRepository {
          */
         public async updateBackgroundColor(color: string): Promise<void> {
                 const response = await fetch(`http://${CubeRepository.baseApiUrl}/backgroundColor`, {
-                        method: 'POST',
+                        method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ color }),
                 });
@@ -106,7 +106,7 @@ export class CubeRepository {
          */
         public async updatePosition(position: { x: number; y: number; z: number }): Promise<void> {
                 const response = await fetch(`http://${CubeRepository.baseApiUrl}/position`, {
-                        method: 'POST',
+                        method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify( position ),
                 });
@@ -133,7 +133,7 @@ export class CubeRepository {
          */
         public async updateRotation(rotation: { x: number; y: number; z: number }): Promise<void> {
                 const response = await fetch(`http://${CubeRepository.baseApiUrl}/rotation`, {
-                        method: 'POST',
+                        method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(rotation ),
                 });
