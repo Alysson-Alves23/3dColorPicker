@@ -5,15 +5,13 @@ import { Controller } from "./core/Controller";
 import {Light} from "./core/Light";
 import {UIManager} from "./ui/UIManager";
 import {store} from "./redux/store";
-import {
-    fetchBackgroundColor,
-    fetchCubeColor,
-    fetchCubePosition,
-    fetchCubeRotation,
-    fetchLightIntensity
-} from "./redux/sync";
+import { fetchAllData } from "./redux/sync"
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    store.dispatch(fetchAllData()).then(() => {
+        console.log("✅ Dados carregados do backend antes de permitir updates.")
+    })
     const render = new Render();
     const cube = new Cube();
     const light = new Light();
@@ -21,11 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new UIManager(cube,light,render.getScene());
     render.getScene().add(light.getLight());
     render.getScene().add(cube.getObject());
-    store.dispatch(fetchCubeColor());
-    store.dispatch(fetchBackgroundColor());
-    store.dispatch(fetchLightIntensity());
-    store.dispatch(fetchCubePosition());
-    store.dispatch(fetchCubeRotation());
+
     const animate = () => {
 
         render.render();
