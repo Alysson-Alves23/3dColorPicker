@@ -1,13 +1,15 @@
-import path from 'path';
-import {DefinePlugin,EnvironmentPlugin} from 'webpack';
-import {config} from 'dotenv';
+const path = require('path');
+const webpack = require('webpack');
+const { config } = require('dotenv');
+
 module.exports = {
-    mode: process.env.NODE_ENV ,
+    mode: process.env.NODE_ENV,
     entry: {
-        index:['./src/index.ts']},
+        index: ['./src/index.ts'],
+    },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'public','dist'),
+        path: path.resolve(__dirname, 'public', 'dist'),
         publicPath: '/dist/',
     },
     resolve: {
@@ -34,10 +36,9 @@ module.exports = {
         hot: true,
     },
     plugins: [
-        new EnvironmentPlugin({...process.env}),
-        new DefinePlugin({
+        new webpack.EnvironmentPlugin({ ...process.env }),
+        new webpack.EnvironmentPlugin({
             "process.env": JSON.stringify(config().parsed),
         }),
-    ]
-
+    ],
 };
