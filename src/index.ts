@@ -9,13 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const render = new Render();
     const cube = new Cube();
     const light = new Light();
-    const controller = new Controller(cube,render);
+    new Controller(cube,render);
     new UIManager(cube,light,render.getScene());
     render.getScene().add(light.getLight());
     render.getScene().add(cube.getObject());
 
     const animate = () => {
-        controller
+
         render.render();
         requestAnimationFrame(animate);
     };

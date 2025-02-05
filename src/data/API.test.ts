@@ -1,4 +1,4 @@
-import CubeRepository from './repository';
+import {CubeRepository} from './repository';
 import {beforeEach, describe, expect, it} from "@jest/globals";
 
 describe('CubeRepository Integration Tests', () => {

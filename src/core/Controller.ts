@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {Cube} from "./Cube";
 import {Render} from "./Render";
+import {setPosition, setRotation, store} from "../redux/store";
 
 export class Controller {
     private cube: Cube;
@@ -20,6 +21,9 @@ export class Controller {
         window.addEventListener('mousedown', this.onMouseDown.bind(this), false);
         window.addEventListener('mousemove', this.onMouseMove.bind(this), false);
         window.addEventListener('mouseup', this.onMouseUp.bind(this), false);
+        window.addEventListener('wheel', this.onWheel.bind(this), false);
+        window.addEventListener('keydown', this.onKeyDown.bind(this), false);
+
     }
 
     private onMouseDown(event: MouseEvent) {
@@ -57,10 +61,40 @@ export class Controller {
         const deltaRotationQuaternion = new THREE.Quaternion().multiplyQuaternions(quaternionY, quaternionX);
         this.cube.getObject().quaternion.multiplyQuaternions(deltaRotationQuaternion, this.cube.getObject().quaternion);
         this.previousMousePosition = { x: event.clientX, y: event.clientY };
+
+        const { x, y, z } = this.cube.getObject().rotation;
+        store.dispatch(setRotation({ x, y, z }));
     }
 
 
     private onMouseUp(_event: MouseEvent) {
         this.isDragging = false;
     }
+    private onWheel(event: WheelEvent): void {
+        const scrollSpeed = 0.01;
+        this.cube.getObject().position.z += event.deltaY * scrollSpeed;
+    }
+
+    private onKeyDown(event: KeyboardEvent): void {
+        const moveDistance = 0.1;
+        switch (event.key.toLowerCase()) {
+            case 'w':
+                this.cube.getObject().position.y += moveDistance;
+                break;
+            case 's':
+                this.cube.getObject().position.y -= moveDistance;
+                break;
+            case 'a':
+                this.cube.getObject().position.x -= moveDistance;
+                break;
+            case 'd':
+                this.cube.getObject().position.x += moveDistance;
+                break;
+            default:
+                break;
+        }
+        store.dispatch(setPosition({ x: this.cube.getObject().position.x, y: this.cube.getObject().position.y, z: this.cube.getObject().position.z }));
+    }
+
+
 }
