@@ -1,6 +1,6 @@
 import config from "./config";
 export class CubeRepository {
-        private static baseApiUrl = `${config.url}:${config.port}`;
+        private static baseApiUrl = `${config.url}${config.port}`;
 
         public async getCubeData(): Promise<{ color: string; position: { x: number; y: number; z: number }; rotation: { x: number; y: number; z: number } }> {
                 const response = await fetch(`http://${CubeRepository.baseApiUrl}/cube`);
