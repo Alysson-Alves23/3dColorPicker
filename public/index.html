@@ -1,13 +1,69 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Aplicação</title>
+    <title>Three.js + TypeScript</title>
+    <link rel="stylesheet" href="style/main.css"/>
 </head>
 <body>
+<div class="menu" id="menu">
+    <div class="drag-handle" id="drag-handle"></div>
+    <h3>Controls</h3>
+    <label for="cube-color">Cube Color:</label>
+    <div id="cube-color-box" class="color-box"></div>
+    <input type="color" id="cube-color" value="#ffffff" style=" display: none;">
 
+    <label for="background-color">Background Color:</label>
+    <div id="background-color-box" class="color-box"></div>
+    <input type="color" id="background-color" value="#000000" style=" display: none;">
 
+    <label for="light-intensity">Light Intensity:</label>
+    <input type="range" id="light-intensity" class="range-slider" min="0" max="5" step="0.1" value="1">
+</div>
+
+<script>
+    let menu = document.getElementById('menu');
+    let dragHandle = document.getElementById('drag-handle');
+    let offsetX = 0, offsetY = 0;
+    let isDragging = false;
+
+    dragHandle.addEventListener('mousedown', (event) => {
+        isDragging = true;
+        offsetX = event.clientX - menu.offsetLeft;
+        offsetY = event.clientY - menu.offsetTop;
+        document.body.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', (event) => {
+        if (isDragging) {
+            menu.style.left = `${event.clientX - offsetX}px`;
+            menu.style.top = `${event.clientY - offsetY}px`;
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        document.body.style.cursor = 'default';
+    });
+
+    document.getElementById('cube-color-box').addEventListener('click', () => {
+        document.getElementById('cube-color').click();
+    });
+
+    document.getElementById('background-color-box').addEventListener('click', () => {
+        document.getElementById('background-color').click();
+    });
+
+    document.getElementById('cube-color').addEventListener('input', (event) => {
+        document.getElementById('cube-color-box').style.backgroundColor = event.target.value;
+    });
+
+    document.getElementById('background-color').addEventListener('input', (event) => {
+        document.getElementById('background-color-box').style.backgroundColor = event.target.value;
+    });
+</script>
 </body>
-<script src="/dist/index.js"></script>
+<script type="module" src="/dist/index.js"></script>
+</body>
 </html>

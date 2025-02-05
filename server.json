@@ -1,8 +1,21 @@
 {
-    "objectColor": "#ff0000",
-    "light": 5,
-    "backgroundColor": "#ffffff",
-    "position": { "x": 0, "y": 0, "z": 0 },
-    "rotation": { "x": 0, "y": 0, "z": 0 }
-
+  "cube": {
+    "color": "#b54a4a",
+    "position": {
+      "x": 0.30000000000000004,
+      "y": -0.4,
+      "z": 2
+    },
+    "rotation": {
+      "x": 2.866814777576261,
+      "y": 0.22203043543606038,
+      "z": -3.0158003521058503
+    }
+  },
+  "light": {
+    "intensity": 3.4
+  },
+  "background": {
+    "color": "#ff0000"
+  }
 }
