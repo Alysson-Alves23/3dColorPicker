@@ -9,22 +9,33 @@ import { fetchAllData } from "./redux/sync"
 
 document.addEventListener('DOMContentLoaded', () => {
 
+
     store.dispatch(fetchAllData()).then(() => {
-        console.log("✅ Dados carregados do backend antes de permitir updates.")
+        console.log(store.getState());
+        let position = store.getState().cube.position;
+        let rotation = store.getState().cube.rotation;
+
+
+        const render = new Render();
+        const cube = new Cube();
+        const light = new Light();
+
+        cube.setPosition(position.x,position.y,position.z);
+        cube.setRotation(rotation.x,rotation.y,rotation.z);
+
+        new Controller(cube,render);
+        new UIManager(cube,light,render.getScene());
+        render.getScene().add(light.getLight());
+        render.getScene().add(cube.getObject());
+
+
+
+        const animate = () => {
+
+            render.render();
+            requestAnimationFrame(animate);
+        };
+
+        animate();
     })
-    const render = new Render();
-    const cube = new Cube();
-    const light = new Light();
-    new Controller(cube,render);
-    new UIManager(cube,light,render.getScene());
-    render.getScene().add(light.getLight());
-    render.getScene().add(cube.getObject());
-
-    const animate = () => {
-
-        render.render();
-        requestAnimationFrame(animate);
-    };
-
-    animate();
 });

@@ -13,7 +13,7 @@ export class Cube {
         const edgesGeometry = new THREE.EdgesGeometry(geometry);
         const edgesMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
         this.edges = new THREE.LineSegments(edgesGeometry, edgesMaterial);
-        this.cube.add(this.edges); // Adiciona as arestas ao cubo
+        this.cube.add(this.edges);
     }
 
     getObject(): THREE.Object3D {

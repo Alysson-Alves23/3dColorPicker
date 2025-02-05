@@ -14,6 +14,7 @@ export class Controller {
         this.cube = cube;
         this.camera = render.getCamera();
         this.raycaster = new THREE.Raycaster();
+
         this.addEventListeners();
     }
 
