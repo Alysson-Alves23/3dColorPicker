@@ -1,6 +1,6 @@
 import { Middleware } from "@reduxjs/toolkit";
 import { CubeRepository } from "../data/repository";
-import { BackgroundState, CubeState, LightState } from "./store";
+import { BackgroundState, CubeState, LightState } from "./models/states";
 
 export interface RootState {
     cube: CubeState;

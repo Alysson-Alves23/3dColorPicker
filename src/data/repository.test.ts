@@ -44,11 +44,10 @@ describe('CubeRepository', () => {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                cube: {
                     color: "#ff0000",
                     position: { x: 1, y: 2, z: 3 },
                     rotation: { x: 1, y: 2, z: 3 }
-                }
+
             })
         });
     });

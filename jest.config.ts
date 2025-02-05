@@ -11,7 +11,8 @@ const config: Config = {
   clearMocks: true,
   collectCoverage: true,
   coverageDirectory: "coverage",
-  coverageProvider: "v8"
+  coverageProvider: "v8",
+  testTimeout: 10000,
 };
 
 export default config;

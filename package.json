@@ -7,7 +7,8 @@
     "build": "cross-env NODE_ENV=development && webpack --progress",
     "dev": "cross-env NODE_ENV=development API_PORT=3000 API_URL=localhost  webpack serve --progress ",
     "server-json": "json-server --watch server.json ",
-    "test": "concurrently --success first --kill-others  \"json-server -p 3060 --watch server.test.json\" \"cross-env NODE_ENV=test API_PORT=3060 API_URL=http://localhost jest\""
+    "test-server-json": "json-server -p 3060 --watch server.test.json",
+    "test": "cross-env NODE_ENV=test API_PORT=3060 API_URL=http://localhost jest"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.1",

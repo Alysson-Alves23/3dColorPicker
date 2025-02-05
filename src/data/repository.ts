@@ -7,7 +7,10 @@ export class CubeRepository {
                 if (!response.ok) {
                         throw new Error(`Failed to fetch cube data: ${response.statusText}`);
                 }
-                return response.json().then(data => data);
+                return response.json().then(data => {
+                        console.log(data);
+                        return data
+                });
         }
 
         public async updateCubeData(cube: { color: string; position: { x: number; y: number; z: number }; rotation: { x: number; y: number; z: number } }): Promise<void> {
