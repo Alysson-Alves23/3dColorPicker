@@ -36,9 +36,9 @@ module.exports = {
         hot: true,
     },
     plugins: [
-        new webpack.EnvironmentPlugin({ ...process.env }),
-        new webpack.EnvironmentPlugin({
-            "process.env": JSON.stringify(config().parsed),
-        }),
-    ],
+    new webpack.DefinePlugin({
+        'process.env': JSON.stringify(config().parsed || {}),
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+],
 };
