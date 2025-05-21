@@ -28,7 +28,7 @@ describe('CubeRepository', () => {
             rotation: { x: 0, y: 0, z: 0 }
 
         });
-        expect(fetchMock).toHaveBeenCalledWith(`http://${config.url}:${config.port}/cube`);
+        expect(fetchMock).toHaveBeenCalledWith(`https://${config.url}:${config.port}/cube`);
     });
 
     it('should update cube data', async () => {
@@ -40,7 +40,7 @@ describe('CubeRepository', () => {
             rotation: { x: 1, y: 2, z: 3 }
         });
 
-        expect(fetchMock).toHaveBeenCalledWith(`http://${config.url}:${config.port}/cube`, {
+        expect(fetchMock).toHaveBeenCalledWith(`https://${config.url}:${config.port}/cube`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -57,14 +57,14 @@ describe('CubeRepository', () => {
 
         const intensity = await cubeRepository.getLightIntensity();
         expect(intensity).toBe(1);
-        expect(fetchMock).toHaveBeenCalledWith(`http://${config.url}:${config.port}/light`);
+        expect(fetchMock).toHaveBeenCalledWith(`https://${config.url}:${config.port}/light`);
     });
 
     it('should update light intensity', async () => {
         fetchMock.mockResponseOnce(JSON.stringify({}));
 
         await cubeRepository.updateLightIntensity(0.5);
-        expect(fetchMock).toHaveBeenCalledWith(`http://${config.url}:${config.port}/light`, {
+        expect(fetchMock).toHaveBeenCalledWith(`https://${config.url}:${config.port}/light`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ intensity: 0.5 })
@@ -76,14 +76,14 @@ describe('CubeRepository', () => {
 
         const backgroundColor = await cubeRepository.getBackgroundColor();
         expect(backgroundColor).toBe("#ff0000");
-        expect(fetchMock).toHaveBeenCalledWith(`http://${config.url}:${config.port}/background`);
+        expect(fetchMock).toHaveBeenCalledWith(`https://${config.url}:${config.port}/background`);
     });
 
     it('should update background color', async () => {
         fetchMock.mockResponseOnce(JSON.stringify({}));
 
         await cubeRepository.updateBackgroundColor("#000000");
-        expect(fetchMock).toHaveBeenCalledWith(`http://${config.url}:${config.port}/background`, {
+        expect(fetchMock).toHaveBeenCalledWith(`https://${config.url}:${config.port}/background`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify( { color: "#000000" })
