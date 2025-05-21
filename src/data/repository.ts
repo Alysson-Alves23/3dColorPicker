@@ -3,7 +3,7 @@ export class CubeRepository {
         private static baseApiUrl = `${config.url}:${config.port}`;
 
         public async getCubeData(): Promise<{ color: string; position: { x: number; y: number; z: number }; rotation: { x: number; y: number; z: number } }> {
-                const response = await fetch(`https://${CubeRepository.baseApiUrl}/cube`);
+                const response = await fetch(`${CubeRepository.baseApiUrl}/cube`);
                 if (!response.ok) {
                         throw new Error(`Failed to fetch cube data: ${response.statusText}`);
                 }
